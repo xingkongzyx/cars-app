@@ -1,15 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Component } from "react";
-import { useContext } from "react";
-import { CounterContext } from "../CounterContext";
-import { store } from "../redux/redux";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "../redux/redux";
+import { useSelector } from "react-redux";
 
 const CounterApp = () => {
     const counter = useSelector((state) => state.value);
-    console.log(counter);
     const dispatch = useDispatch();
 
     const handleIncrement = () => {

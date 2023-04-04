@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { createContext } from "react";
+
 function counterReducer(state = { value: 0 }, action) {
     console.log("clicked:", state);
     switch (action.type) {
@@ -31,6 +34,18 @@ const createStore = (reducer, initialState) => {
     };
 };
 
-export let store = createStore(counterReducer, { value: 0 });
+let store = createStore(counterReducer, { value: 0 });
 
-// store.subscribe(() => console.log(store.getState()));
+let ReduxContext = createContext(store);
+
+const Provider = ({ store, children }) => {
+    return <ReduxContext value={store}>{children}</ReduxContext>;
+};
+
+const useDispatch = () => {
+    const context = useContext(ReduxContext);
+    return context.dispatch;
+};
+
+export { Provider, useDispatch, store };
+
